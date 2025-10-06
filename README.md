@@ -25,7 +25,7 @@ src/
 │   ├── WeatherDisplay.jsx    # Displays fetched weather data
 │
 ├── App.jsx                   # Main app logic, state handling
-├── index.css                 # Tailwind imports
+├── App.css                   # Styling
 └── main.jsx                  # React entry point
 ```
 
