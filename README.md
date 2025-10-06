@@ -132,7 +132,6 @@ const response = await axios.get(
 ## 🧑‍💻 Tech Stack
 
 - React.js (Vite)
-- Tailwind CSS
 - Axios
 - OpenWeatherMap API
 - LocalStorage (bonus)
