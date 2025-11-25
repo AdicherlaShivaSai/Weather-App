@@ -4,7 +4,7 @@ import WeatherDisplay from "./components/WeatherDisplay";
 import axios from "axios";
 import "./App.css";
 
-const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [city, setCity] = useState(localStorage.getItem("lastCity") || "");
@@ -17,13 +17,19 @@ function App() {
     try {
       setLoading(true);
       setError("");
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`
-      );
+
+      const response = await axios.get(`${BACKEND_URL}/api/weather`, {
+        params: { city: cityName },
+      });
+
       setWeather(response.data);
       localStorage.setItem("lastCity", cityName);
     } catch (err) {
-      setError("City not found. Please try again.");
+      if (err.response?.status === 404) {
+        setError("City not found. Please try again.");
+      } else {
+        setError("Something went wrong. Please try again later.");
+      }
       setWeather(null);
     } finally {
       setLoading(false);
